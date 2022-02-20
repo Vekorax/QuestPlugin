@@ -1,0 +1,4 @@
+name: Quest
+version: 1.0.0
+main: qc.veko.quest.QuestPlugin
+author: Veko
