@@ -22,4 +22,13 @@ public class QuestPlugin extends JavaPlugin {
         commandFramework.registerCommands(new QuestCommand());
     }
 
+    public PlayerInformations getPlayerInformations(Player player) {
+        PlayerInformations playerInformations = this.getPlayerInformationsMap().get(player.getUniqueId());
+        return playerInformations;
+    }
+
+    public QuestManager getQuest(int id) {
+        QuestManager quest = this.getQuests().get(id-1);
+        return quest;
+    }
 }

@@ -22,11 +22,6 @@ public class PlayerInformations {
         this.points += points;
     }
 
-    public static PlayerInformations getPlayerInformations(Player player) {
-        PlayerInformations playerInformations = QuestPlugin.getInstance().getPlayerInformationsMap().get(player.getUniqueId());
-        return playerInformations;
-    }
-
 
 
 }

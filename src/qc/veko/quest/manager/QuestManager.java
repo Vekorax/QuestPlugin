@@ -17,6 +17,7 @@ public class QuestManager {
     private QuestActionListener questActionListener;
     @Getter private Quest quest;
     @Getter @Setter private boolean activeState = true;
+    @Getter @Setter private int amountXpPerAction = 1;
 
     public QuestManager(Quest quest) {
         this.quest = quest;
@@ -43,14 +44,11 @@ public class QuestManager {
         this.getQuestAdvancement().put(playerInformations, 0);
     }
 
-    public void addAdvancementToQuest(PlayerInformations playerInformations, int amount) {
+    public void addAdvancementToQuest(PlayerInformations playerInformations) {
+        if (this.getQuestAdvancement().get(playerInformations) >= this.getQuest().getAmount())
+            playerInformations.addPoints(this.quest.getPoints());
         int originalAmount = this.getQuestAdvancement().get(playerInformations);
-        this.getQuestAdvancement().put(playerInformations, originalAmount + amount);
-    }
-
-    public static QuestManager getQuest(int id) {
-        QuestManager quest = QuestPlugin.getInstance().getQuests().get(id-1);
-        return quest;
+        this.getQuestAdvancement().put(playerInformations, originalAmount + amountXpPerAction);
     }
 
 
