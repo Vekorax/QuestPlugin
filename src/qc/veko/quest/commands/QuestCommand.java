@@ -1,7 +1,5 @@
 package qc.veko.quest.commands;
 
-import net.minecraft.server.v1_8_R3.Item;
-import net.minecraft.server.v1_8_R3.Items;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -9,7 +7,6 @@ import qc.veko.quest.commands.engine.Command;
 import qc.veko.quest.commands.engine.CommandArgs;
 import qc.veko.quest.engine.Action;
 import qc.veko.quest.engine.Quest;
-import qc.veko.quest.utils.QuestsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,7 @@ public class QuestCommand {
                 items.add(new ItemStack(Material.APPLE));
 
                 Quest quest = new Quest(name, "", 25, Action.BREAK, items);
-                QuestsUtil.printQuest(quest, player);
+                quest.getQuestManager().print(player);
                 return;
             }
     }
