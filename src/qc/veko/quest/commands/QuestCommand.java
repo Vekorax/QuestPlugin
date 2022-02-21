@@ -23,7 +23,7 @@ public class QuestCommand {
                 List<ItemStack> items = new ArrayList<ItemStack>();
                 items.add(new ItemStack(Material.APPLE));
 
-                Quest quest = new Quest(name, "", 25, Action.BREAK, items);
+                Quest quest = new Quest(name, "", 25, Action.BREAK, items, 15);
                 quest.getQuestManager().print(player);
                 return;
             }
