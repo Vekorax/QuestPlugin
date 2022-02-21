@@ -1,17 +1,18 @@
 package qc.veko.quest;
 
 import lombok.Getter;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import qc.veko.quest.commands.QuestCommand;
 import qc.veko.quest.commands.engine.CommandFramework;
+import qc.veko.quest.engine.PlayerInformations;
 import qc.veko.quest.manager.QuestManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class QuestPlugin extends JavaPlugin {
-
     @Getter private List<QuestManager> quests = new ArrayList<QuestManager>();
+    @Getter private Map<UUID, PlayerInformations> playerInformationsMap = new HashMap<>();
     @Getter public static QuestPlugin instance;
 
     public void onEnable() {

@@ -1,20 +1,28 @@
 package qc.veko.quest.manager;
 
 import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import qc.veko.quest.QuestPlugin;
 import qc.veko.quest.engine.PlayerInformations;
 import qc.veko.quest.engine.Quest;
+import qc.veko.quest.listeners.QuestActionListener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuestManager {
-    private List<PlayerInformations> playersInformations = new ArrayList<>();
+    @Getter private Map<PlayerInformations, Integer> questAdvancement = new HashMap<>();
+    private QuestActionListener questActionListener;
     @Getter private Quest quest;
+    @Getter @Setter private boolean activeState = true;
 
     public QuestManager(Quest quest) {
         this.quest = quest;
+        this.questActionListener = new QuestActionListener(this);
+
+        Bukkit.getPluginManager().registerEvents(questActionListener, QuestPlugin.getInstance());
     }
 
     public void print(Player player) {
@@ -31,13 +39,13 @@ public class QuestManager {
         player.sendMessage("-----------------------QUEST-----------------------");
     }
 
-    public void addPlayer(PlayerInformations playerInformations) {
-        this.playersInformations.add(playerInformations);
-        playerInformations.addPoints(quest.getPoints());
+    public void startQuest(PlayerInformations playerInformations) {
+        this.getQuestAdvancement().put(playerInformations, 0);
     }
 
-    public List<PlayerInformations> getPlayers() {
-        return playersInformations;
+    public void addAdvancementToQuest(PlayerInformations playerInformations, int amount) {
+        int originalAmount = this.getQuestAdvancement().get(playerInformations);
+        this.getQuestAdvancement().put(playerInformations, originalAmount + amount);
     }
 
     public static QuestManager getQuest(int id) {
