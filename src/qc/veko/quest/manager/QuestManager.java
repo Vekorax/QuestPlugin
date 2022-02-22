@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class QuestManager {
     @Getter private Map<PlayerInformations, Integer> questAdvancement = new HashMap<>();
-    private QuestActionListener questActionListener;
+    @Getter private QuestActionListener questActionListener;
     @Getter private Quest quest;
     @Getter @Setter private boolean activeState = true;
     @Getter @Setter private int amountXpPerAction = 1;

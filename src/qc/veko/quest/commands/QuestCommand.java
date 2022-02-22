@@ -3,10 +3,14 @@ package qc.veko.quest.commands;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import qc.veko.quest.QuestPlugin;
 import qc.veko.quest.commands.engine.Command;
 import qc.veko.quest.commands.engine.CommandArgs;
 import qc.veko.quest.engine.Action;
+import qc.veko.quest.engine.InventoryOptions;
+import qc.veko.quest.engine.PlayerInformations;
 import qc.veko.quest.engine.Quest;
+import qc.veko.quest.inventory.CreateQuestInventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +21,11 @@ public class QuestCommand {
         Player player = commandArgs.getPlayer();
         if (commandArgs.getArgs().length > 1 && commandArgs.getArgs()[0].equalsIgnoreCase("add"))
             if (player.hasPermission("quest.add") || player.isOp()) {
-                String name = "";
+
+                PlayerInformations playerInformations = QuestPlugin.getInstance().getPlayerInformations(player);
+                playerInformations.getInventoryManager().openInventory(InventoryOptions.CREATE);
+
+                /*String name = "";
                 for (int i = 1; i <= commandArgs.getArgs().length - 1; ++i)
                     name += " " + commandArgs.getArgs()[i];
                 List<ItemStack> items = new ArrayList<ItemStack>();
@@ -25,7 +33,7 @@ public class QuestCommand {
 
                 Quest quest = new Quest(name, "", 25, Action.BREAK, items, 15);
                 quest.getQuestManager().print(player);
-                return;
+                return;*/
             }
     }
 }

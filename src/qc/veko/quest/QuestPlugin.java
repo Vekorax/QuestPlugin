@@ -23,7 +23,11 @@ public class QuestPlugin extends JavaPlugin {
     }
 
     public PlayerInformations getPlayerInformations(Player player) {
-        PlayerInformations playerInformations = this.getPlayerInformationsMap().get(player.getUniqueId());
+        PlayerInformations playerInformations = new PlayerInformations(player);
+        try {
+            playerInformations = this.getPlayerInformationsMap().get(player.getUniqueId());
+        } catch(Exception e){}
+
         return playerInformations;
     }
 
